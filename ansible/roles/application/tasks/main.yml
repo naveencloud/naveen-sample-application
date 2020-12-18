@@ -1,0 +1,49 @@
+---
+- name: Run YUM Update
+  yum:
+    name: '*'
+    state: latest
+  become: yes
+  become_method: sudo
+
+- name: install the latest version of Apache
+  yum:
+    name:
+      - httpd
+    state: latest
+  become: yes
+  become_method: sudo
+
+- name:  Copy Sourcecode folder File
+  unarchive:
+    src: "../sourcecode.zip"
+    dest: "/var/www/"
+    creates: "/var/www/sourcecode"
+    force: no
+    copy: false
+  become: yes
+  become_method: sudo
+
+- name: Create a symbolic link
+  file:
+    src: /var/www/sourcecode
+    dest: /var/www/sourcecode
+    owner: apache
+    group: apache
+    state: link
+  become: yes
+  become_method: sudo
+
+- name: Stop Apache Service
+  service:
+    name: httpd
+    state: stopped
+  become: yes
+  become_method: sudo
+
+- name: Restart Apache Service
+  service:
+    name: httpd
+    state: restarted
+  become: yes
+  become_method: sudo
