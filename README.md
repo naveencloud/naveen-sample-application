@@ -6,7 +6,7 @@ Repo Name: naveen_sample_application_deployment
 
 AWS REGION TO USE: eu-central-1
 
-Language: Terraform (HCL)
+Language: Terraform (HCL)..,
 
 This repo has the code to create required infrastructure to deploy any webapplication (i.e., MediaWiki)
 
